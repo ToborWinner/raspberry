@@ -25,7 +25,7 @@ in
 
     voskModelName = lib.mkOption {
       default = "vosk-model-small-en-us-0.15";
-      type = lib.types.string;
+      type = lib.types.str;
       description = "The vosk model to install in the configuration. Downloaded from alphacephei.com.";
     };
   };

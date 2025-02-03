@@ -26,7 +26,14 @@ enum Intents {
 }
 
 fn main() {
-    let config_dir = get_config_path();
+    let mut args_iter = std::env::args();
+    _ = args_iter.next();
+    let config_dir: std::path::PathBuf = if let Some(config_dir) = args_iter.next() {
+        config_dir.into()
+    } else {
+        get_config_path()
+    };
+
     let mut config = AssistantConfig::build(get_config_file(&config_dir, "vosk-model-small-en-us-0.15").to_str().expect("Failed to convert PathBuf to &str"), EmbeddingModelSource::Local(EmbeddingModelFilePaths {
         onnx: get_config_file(&config_dir, "intents/model.onnx").to_str().expect("Failed to convert PathBuf to &str"),
         tokenizer: get_config_file(&config_dir, "intents/tokenizer.json").to_str().expect("Failed to convert PathBuf to &str"),
