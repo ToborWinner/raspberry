@@ -89,10 +89,10 @@ in
           # Hardening
           # NoNewPrivileges = true;
           # ProtectSystem = "strict";
-          ProtectHome = true;
+          # ProtectHome = true;
           ProtectClock = true;
           PrivateNetwork = true; # Network not needed for now
-          ProtectKernelTunables = true;
+          # ProtectKernelTunables = true;
           ProtectKernelModules = true;
           ProtectKernelLogs = true;
           LockPersonality = true;
