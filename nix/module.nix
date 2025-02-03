@@ -83,12 +83,12 @@ in
           Group = cfg.user;
           Type = "simple";
           ExecStart = "${cfg.package}/bin/raspberry ${dataDir}";
-          Restart = "no"; # or always and set RestartSec = 5
+          Restart = "no"; # or "always" and set RestartSec = 5
           ConfigurationDirectory = "raspberry"; # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#RuntimeDirectory=
 
           # Hardening
-          NoNewPrivileges = true;
-          ProtectSystem = "strict";
+          # NoNewPrivileges = true;
+          # ProtectSystem = "strict";
           ProtectHome = true;
           ProtectClock = true;
           PrivateNetwork = true; # Network not needed for now
