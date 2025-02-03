@@ -65,6 +65,7 @@ in
         description = "Raspberry Assistant daemon user";
         isSystemUser = true;
         group = cfg.user;
+        extraGroups = [ "audio" "gpio" ];
       };
 
       systemd.services.raspberry = {
