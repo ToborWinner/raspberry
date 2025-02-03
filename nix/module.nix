@@ -65,7 +65,7 @@ in
         description = "Raspberry Assistant daemon user";
         isSystemUser = true;
         group = cfg.user;
-        extraGroups = [ "audio" "gpio" ];
+        extraGroups = [ "audio" "gpio" (lib.mkIf (config.services.pipewire.enable && config.services.pipewire.systemWide) "pipewire") ];
       };
 
       users.groups.${cfg.user} = { };
