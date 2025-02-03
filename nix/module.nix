@@ -82,7 +82,7 @@ in
           User = cfg.user;
           Group = cfg.user;
           Type = "simple";
-          ExecStart = "${cfg.package}/bin/raspberry ${dataDir} && echo 'changed'";
+          ExecStart = "${cfg.package}/bin/raspberry ${dataDir}";
           Restart = "no"; # or "always" and set RestartSec = 5
           ConfigurationDirectory = "raspberry"; # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#RuntimeDirectory=
 
