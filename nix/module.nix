@@ -81,21 +81,10 @@ in
         serviceConfig = {
           User = cfg.user;
           Group = cfg.user;
-          Type = "exec"; # or simple maybe?
+          Type = "simple";
           ExecStart = "${cfg.package}/bin/raspberry ${dataDir}";
           Restart = "no"; # or always and set RestartSec = 5
           ConfigurationDirectory = "raspberry"; # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#RuntimeDirectory=
-
-          # Add configuration - TODO: For embeddingModel use some nix functions
-          preStart = ''
-            ln -sfn ${voskModel} ${dataDir}/${cfg.voskModelName}
-            mkdir -p /etc/raspberry/intents
-            ln -sfn ${embeddingModel.config} ${dataDir}/intents/config.json
-            ln -sfn ${embeddingModel.special_tokens_map} ${dataDir}/intents/special_tokens_map.json
-            ln -sfn ${embeddingModel.tokenizer_config} ${dataDir}/intents/tokenizer_config.json
-            ln -sfn ${embeddingModel.tokenizer} ${dataDir}/intents/tokenizer.json
-            ln -sfn ${embeddingModel.model} ${dataDir}/intents/model.onnx
-          '';
 
           # Hardening
           NoNewPrivileges = true;
@@ -110,6 +99,17 @@ in
           RemoveIPC = true;
           PrivateUsers = true;
         };
+
+        # Add configuration - TODO: For embeddingModel use some nix functions
+        preStart = ''
+          ln -sfn ${voskModel} ${dataDir}/${cfg.voskModelName}
+          mkdir -p /etc/raspberry/intents
+          ln -sfn ${embeddingModel.config} ${dataDir}/intents/config.json
+          ln -sfn ${embeddingModel.special_tokens_map} ${dataDir}/intents/special_tokens_map.json
+          ln -sfn ${embeddingModel.tokenizer_config} ${dataDir}/intents/tokenizer_config.json
+          ln -sfn ${embeddingModel.tokenizer} ${dataDir}/intents/tokenizer.json
+          ln -sfn ${embeddingModel.model} ${dataDir}/intents/model.onnx
+        '';
       };
     };
 }
