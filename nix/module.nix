@@ -40,25 +40,25 @@ in
         config = pkgs.fetchurl {
           url = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json";
           hash = "sha256-CU+OiRuTLyAAySz8ZjusTGIGn12K9bUnjEMGrvMIR1A=";
-        }
+        };
         special_tokens_map = pkgs.fetchurl {
           url = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/special_tokens_map.json";
           hash = "sha256-ttNGvjZqfR1IMy28n987+JYLXYeVIrd5ndulnnYjfuM=";
-        }
+        };
         tokenizer_config = pkgs.fetchurl {
           url = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer_config.json";
           hash = "sha256-kmHn15tEyBlcHK2itFPlWwCuuB6QemZkl0tNd3YXKrM=";
-        }
+        };
         tokenizer = pkgs.fetchurl {
           url = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer.json";
           hash = "sha256-0kGmDV6PBMwbKz6e96SSGye/Um2fYFCrkPkmeh+eXGY=";
-        }
+        };
         model = pkgs.fetchurl {
           url = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/model.onnx";
           hash = "sha256-go4Ultf6u3nPpNzYT6OGJcDT0h2kdKAPCNsPVZlAzzU=";
-        }
+        };
       };
-      dataDir = "/etc/raspberry"
+      dataDir = "/etc/raspberry";
     in
     lib.mkIf cfg.enable {
       users.users.${cfg.user} = {
@@ -86,7 +86,7 @@ in
 
           # Add configuration - TODO: For embeddingModel use some nix functions
           preStart = ''
-            ln -sfn ${voskModel} ${dataDir}/${voskModelName}
+            ln -sfn ${voskModel} ${dataDir}/${cfg.voskModelName}
             mkdir -p /etc/raspberry/intents
             ln -sfn ${embeddingModel.config} ${dataDir}/intents/config.json
             ln -sfn ${embeddingModel.special_tokens_map} ${dataDir}/intents/special_tokens_map.json
