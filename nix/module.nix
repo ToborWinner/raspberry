@@ -82,7 +82,7 @@ in
           User = cfg.user;
           Group = cfg.user;
           Type = "simple";
-          ExecStart = "${cfg.package}/bin/raspberry ${dataDir}";
+          ExecStart = "${cfg.package}/bin/raspberry ${dataDir} && echo 'changed'";
           Restart = "no"; # or "always" and set RestartSec = 5
           ConfigurationDirectory = "raspberry"; # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#RuntimeDirectory=
 
@@ -90,14 +90,14 @@ in
           # NoNewPrivileges = true;
           # ProtectSystem = "strict";
           # ProtectHome = true;
-          ProtectClock = true;
-          PrivateNetwork = true; # Network not needed for now
+          # ProtectClock = true;
+          # PrivateNetwork = true; # Network not needed for now
           # ProtectKernelTunables = true;
-          ProtectKernelModules = true;
-          ProtectKernelLogs = true;
-          LockPersonality = true;
-          RemoveIPC = true;
-          PrivateUsers = true;
+          # ProtectKernelModules = true;
+          # ProtectKernelLogs = true;
+          # LockPersonality = true;
+          # RemoveIPC = true;
+          # PrivateUsers = true;
         };
 
         # Add configuration - TODO: For embeddingModel use some nix functions
