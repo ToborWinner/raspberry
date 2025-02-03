@@ -68,6 +68,8 @@ in
         extraGroups = [ "audio" "gpio" ];
       };
 
+      users.groups.${cfg.user} = { };
+
       systemd.services.raspberry = {
         description = "Raspberry Assistant service";
 
